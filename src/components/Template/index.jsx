@@ -1,8 +1,8 @@
 import React from 'react';
-import { Navbar } from '../Navbar';
+import Navbar from '../Navbar';
 import { Main } from './style';
 
-export const Template = ({ children }) => (
+const Template = ({ children }) => (
     <>
         <Navbar />
         <Main>
@@ -10,3 +10,5 @@ export const Template = ({ children }) => (
         </Main>        
     </>
 )
+
+export default Template;

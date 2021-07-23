@@ -4,3 +4,7 @@ import { BASE_URL } from "./credenciais"
 export const motoristaCount = axios.create({
     baseURL: `${BASE_URL}/v1/motoristas/count`
 })
+
+export const listaMotoristas = axios.create({
+    baseURL: `${BASE_URL}/v1/motoristas`
+})

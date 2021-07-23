@@ -2,8 +2,10 @@ import React from 'react'
 
 import { NavbarWrapper, LogoWrapper } from './style'
 
-export const Navbar = () => (
+const Navbar = () => (
     <NavbarWrapper>
         <LogoWrapper to="/" >Vrum</LogoWrapper>
     </NavbarWrapper>
 )
+
+export default Navbar;
