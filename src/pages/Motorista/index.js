@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { useHistory } from 'react-router';
+import { CreateButtonWrapper } from './style';
 
 //Componentes
 import MotoristaTable from '../../components/Tables/MotoristaTable';
@@ -9,12 +10,21 @@ import { RedirectButton } from '../../components/Button';
 import MainContainer from '../../components/MainContainer';
 
 //APIs
-import { listaMotoristas } from '../../services/motorista';
+import { listaMotoristas, deletarMotorista } from '../../services/motorista';
 
 function Motorista() {
     const [motoristas, setMotoristas] = useState([]);
     
     const history = useHistory();
+
+    const deletarMotoristaAsync = async (motoristaId) => {
+        try{
+            await deletarMotorista(motoristaId)
+            window.location.reload();
+        } catch(err) {
+            alert('Não foi possível realizar está operação.')
+        }
+    }
 
     useEffect(() => {
         async function handleMotoristas() {
@@ -33,11 +43,15 @@ function Motorista() {
     return (
         <Template>
             <Title>Motorista</Title>
+            <CreateButtonWrapper>
+                <RedirectButton href="/motoristas/criar">
+                    Criar novo Motorista
+                </RedirectButton>
+            </CreateButtonWrapper>
             <MainContainer>
-                <RedirectButton href="/criar">Criar novo Motorista</RedirectButton>
-            {!motoristas.length 
-                ? <h1>Ainda não foi cadastrado nenhum motorista.</h1> 
-                : <MotoristaTable obj={motoristas} />}
+                {!motoristas.length 
+                    ? <div>Ainda não foi cadastrado nenhum motorista.</div> 
+                    : <MotoristaTable obj={motoristas} onClick={deletarMotoristaAsync} />}
             </MainContainer>
         </Template>
     )

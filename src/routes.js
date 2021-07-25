@@ -7,6 +7,7 @@ import Corrida from './pages/Corrida'
 import Motorista from './pages/Motorista'
 import Passageiro from './pages/Passageiro'
 import NotFound from './pages/NotFound'
+import Cadastros from './pages/Cadastros/CadMotorista'
 
 function AppRouter() {
     return (
@@ -14,8 +15,9 @@ function AppRouter() {
             <Switch>
                 <Route exact path="/" component={Landing} />
                 <Route path="/corridas" component={Corrida} />
-                <Route path="/motoristas" component={Motorista} />
+                <Route exact path="/motoristas" component={Motorista} />
                 <Route path="/passageiros" component={Passageiro} />
+                <Route path="/motoristas/criar" component={Cadastros} />
                 <Route component={NotFound} />
             </Switch>
         </Router>

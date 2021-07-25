@@ -1,8 +1,12 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { Table, StatusIcon } from '../style'
 import Tooltip from '../../Tooltip'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEdit, faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 
-const MotoristaTable = ({obj}) => (
+
+const MotoristaTable = ({obj, onClick}) => (
     <Table>
         <thead>
             <tr>
@@ -28,7 +32,16 @@ const MotoristaTable = ({obj}) => (
                             <StatusIcon status={item.status} />
                         </Tooltip>
                     </th>
-                    <th></th>
+                    <th>
+                        <Tooltip displayText="Deletar motorista" onClick={()=>onClick(item.id)}>
+                            <FontAwesomeIcon icon={faTimesCircle} color="red"/>
+                        </Tooltip>
+                        <Link to="/motoristas/atualizar">
+                            <Tooltip displayText="Editar motorista">
+                                <FontAwesomeIcon icon={faEdit} color="orange"/>
+                            </Tooltip>
+                        </Link>
+                    </th>
                 </tr>
             ))}
         </tbody>
