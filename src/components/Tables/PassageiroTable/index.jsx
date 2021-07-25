@@ -1,7 +1,10 @@
 import React from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
+import Tooltip from '../../Tooltip';
 import { Table } from '../style'
 
-const PassageiroTable = ({ obj }) => (
+const PassageiroTable = ({obj, onClick}) => (
     <Table>
         <thead>
             <tr>
@@ -19,7 +22,11 @@ const PassageiroTable = ({ obj }) => (
                     <th>{item.dataNasc}</th>
                     <th>{item.cpf}</th>
                     <th>{item.sexo}</th>
-                    <th></th>
+                    <th>
+                        <Tooltip displayText="Deletar passageiro" onClick={()=>onClick(item.id)}>
+                            <FontAwesomeIcon icon={faTimesCircle} color="red"/>
+                        </Tooltip>
+                    </th>
                 </tr>
             ))}
         </tbody>

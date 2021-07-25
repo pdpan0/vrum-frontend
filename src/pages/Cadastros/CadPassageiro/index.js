@@ -1,40 +1,37 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 //Componentes
 import Template from '../../../components/Template';
 import Title from '../../../components/Title'
 import { Form, Input, Label } from '../../../components/Form';
+
 //APIs
-import { cadastroMotorista } from '../../../services/motorista';
+import { cadastroPassageiro } from '../../../services/passageiro';
 import { ContainerWrapper } from './style';
 import { FormButton } from '../../../components/Button';
 
-function CadMotorista() {
+function CadPassageiro() {
     const [nome, setNome] = useState('');
     const [dataNasc, setDataNasc] = useState(new Date(2001,1,1));
     const [cpf, setCpf] = useState('');
     const [sexo, setSexo] = useState('');
-    const [modeloCarro, setModeloCarro] = useState('');
-    const [status,] = useState(true);
 
     const history = useHistory();
     
-    async function submitMotorista(e) {
+    async function submitPassageiro(e) {
         e.preventDefault();
 
         let data = {
             "nome": nome,
             "dataNasc": dataNasc,
             "cpf": cpf,
-            "sexo": sexo,
-            "modeloCarro": modeloCarro,
-            "status": status
+            "sexo": sexo
         };
 
         try {
-            await cadastroMotorista.post('#', data)
-            history.push("/motoristas");
+            await cadastroPassageiro.post('#', data)
+            history.push("/passageiros");
         } catch(err) {
             
         }
@@ -56,10 +53,10 @@ function CadMotorista() {
 
     return (
         <Template>
-            <Title>Conte mais sobre este Motorista.</Title>
-            <Form onSubmit={submitMotorista}>
+            <Title>Conte mais sobre este Passageiro.</Title>
+            <Form onSubmit={submitPassageiro}>
                 <Label>
-                    Nome do motorista:<br/>
+                    Nome do passageiro:<br/>
                     <Input type="text" 
                        value={nome}
                        onChange={(e) => setNome(e.target.value)}
@@ -95,17 +92,10 @@ function CadMotorista() {
                             required />Feminino
                     </ContainerWrapper>
                 </Label>
-                <Label>
-                    Modelo do Carro:
-                    <Input type="text" 
-                       value={modeloCarro}
-                       onChange={(e) => setModeloCarro(e.target.value)}
-                       required />
-                </Label>
-                <FormButton type="submit">Cadastrar Motorista</FormButton>
+                <FormButton type="submit">Cadastrar Passageiro</FormButton>
             </Form>
         </Template>
     )
 }
 
-export default CadMotorista;
+export default CadPassageiro;

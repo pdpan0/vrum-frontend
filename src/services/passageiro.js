@@ -8,3 +8,9 @@ export const passageiroCount = axios.create({
 export const listaPassageiros = axios.create({
     baseURL: `${BASE_URL}/v1/passageiros`
 })
+
+export const cadastroPassageiro = axios.create({
+    baseURL: `${BASE_URL}/v1/passageiros`
+})
+export const deletarPassageiro = (passageiroId) => 
+    axios.delete(`${BASE_URL}/v1/passageiros/${passageiroId}`)

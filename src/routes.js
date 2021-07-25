@@ -10,6 +10,7 @@ import NotFound from './pages/NotFound'
 import CadMotorista from './pages/Cadastros/CadMotorista'
 import AtualizarMotorista from './pages/Atualizar/AtualizarMotorista'
 import MotoristaDetalhes from './pages/MotoristaDetalhes'
+import CadPassageiro from './pages/Cadastros/CadPassageiro'
 
 function AppRouter() {
     return (
@@ -17,7 +18,8 @@ function AppRouter() {
             <Switch>
                 <Route exact path="/" component={Landing} />
                 <Route path="/corridas" component={Corrida} />
-                <Route path="/passageiros" component={Passageiro} />
+                <Route exact path="/passageiros" component={Passageiro} />
+                <Route path="/passageiros/criar" component={CadPassageiro} />
                 <Route exact path="/motoristas" component={Motorista} />
                 <Route path="/motoristas/criar" component={CadMotorista} />
                 <Route path="/motoristas/:id/detalhes" component={MotoristaDetalhes} />

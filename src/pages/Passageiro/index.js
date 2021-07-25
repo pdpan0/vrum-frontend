@@ -8,7 +8,8 @@ import Title from '../../components/Title';
 import { RedirectButton } from '../../components/Button';
 import MainContainer from '../../components/MainContainer';
 //APIs
-import { listaPassageiros } from '../../services/passageiro';
+import { deletarPassageiro, listaPassageiros } from '../../services/passageiro';
+import { CreateButtonWrapper } from '../Motorista/style';
 
 function Passageiro() {
     const [passageiros, setPassageiros] = useState([]);
@@ -27,16 +28,29 @@ function Passageiro() {
         }
 
         handlePassageiros()
-    },[])
+    },[passageiros])
+
+    const deletarPassageiroAsync = async (passageiroId) => {
+        try{
+            await deletarPassageiro(passageiroId)
+            // window.location.reload();
+        } catch(err) {
+            alert('Não foi possível realizar está operação.')
+        }
+    }
     
     return (
         <Template>
             <Title>Passageiros</Title>
+            <CreateButtonWrapper>
+                <RedirectButton to="/passageiros/criar">
+                    Criar novo Passageiro
+                </RedirectButton>
+            </CreateButtonWrapper>
             <MainContainer>
-                <RedirectButton to="/criar">Criar novo Passageiro</RedirectButton>
             {!passageiros.length 
                 ? <h1>Ainda não foi cadastrado nenhum passageiro.</h1> 
-                : <PassageiroTable obj={passageiros} />}
+                : <PassageiroTable obj={passageiros} onClick={deletarPassageiroAsync}/>}
             </MainContainer>
         </Template>
     )

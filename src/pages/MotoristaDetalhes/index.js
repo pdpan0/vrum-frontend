@@ -7,7 +7,7 @@ import { Container, ImageProfile, ProfileInfo, Wrapper } from './style';
 //Componentes
 import Template from '../../components/Template';
 import Title from '../../components/Title';
-import { RedirectButton, FormButton } from '../../components/Button';
+import { FormButton } from '../../components/Button';
 
 //APIs
 import { getMotoristaPorId as serviceMotoristaPorId, serviceAtivarMotorista, serviceInativarMotorista } from '../../services/motorista'

@@ -12,6 +12,10 @@ export const Table = styled.table`
         padding: 8px;
     }
 
+    td, th:nth-child(5) {
+        text-align: center;
+    }
+
     td, th:nth-child(6) {
         text-align: center;
     }
