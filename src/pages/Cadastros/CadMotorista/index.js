@@ -6,7 +6,7 @@ import Template from '../../../components/Template';
 import Title from '../../../components/Title'
 import { Form, Input, Label } from '../../../components/Form';
 //APIs
-import { cadastroMotorista, existMotoristaByCPF } from '../../../services/motorista';
+import { cadastroMotorista } from '../../../services/motorista';
 import { ContainerWrapper } from './style';
 import { FormButton } from '../../../components/Button';
 
@@ -36,7 +36,7 @@ function CadMotorista() {
             await cadastroMotorista.post('#', data)
             history.push("/motoristas");
         } catch(err) {
-            console.log(err)
+            
         }
     }
 

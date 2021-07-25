@@ -15,7 +15,6 @@ export const RedirectButtonWrapper = styled(Link)`
 `;
 
 export const FormButtonContainer = styled.div`
-    width: 100%;
     display: inherit;
     justify-content: center;
     margin: 2rem;

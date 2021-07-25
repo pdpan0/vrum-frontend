@@ -33,7 +33,7 @@ function Passageiro() {
         <Template>
             <Title>Passageiros</Title>
             <MainContainer>
-                <RedirectButton href="/criar">Criar novo Passageiro</RedirectButton>
+                <RedirectButton to="/criar">Criar novo Passageiro</RedirectButton>
             {!passageiros.length 
                 ? <h1>Ainda não foi cadastrado nenhum passageiro.</h1> 
                 : <PassageiroTable obj={passageiros} />}

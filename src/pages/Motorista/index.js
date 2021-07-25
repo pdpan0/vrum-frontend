@@ -10,26 +10,17 @@ import { RedirectButton } from '../../components/Button';
 import MainContainer from '../../components/MainContainer';
 
 //APIs
-import { listaMotoristas, deletarMotorista } from '../../services/motorista';
+import { getMotoristas, deletarMotorista } from '../../services/motorista';
 
 function Motorista() {
     const [motoristas, setMotoristas] = useState([]);
     
     const history = useHistory();
 
-    const deletarMotoristaAsync = async (motoristaId) => {
-        try{
-            await deletarMotorista(motoristaId)
-            window.location.reload();
-        } catch(err) {
-            alert('Não foi possível realizar está operação.')
-        }
-    }
-
     useEffect(() => {
         async function handleMotoristas() {
             try{
-                await listaMotoristas.get().then(
+                await getMotoristas.get().then(
                     res => setMotoristas(res.data)
                 );
             }catch (err) {
@@ -38,13 +29,22 @@ function Motorista() {
         }
 
         handleMotoristas()
-    },[])
+    },[motoristas])
+
+    const deletarMotoristaAsync = async (motoristaId) => {
+        try{
+            await deletarMotorista(motoristaId)
+            // window.location.reload();
+        } catch(err) {
+            alert('Não foi possível realizar está operação.')
+        }
+    }
     
     return (
         <Template>
             <Title>Motorista</Title>
             <CreateButtonWrapper>
-                <RedirectButton href="/motoristas/criar">
+                <RedirectButton to="/motoristas/criar">
                     Criar novo Motorista
                 </RedirectButton>
             </CreateButtonWrapper>

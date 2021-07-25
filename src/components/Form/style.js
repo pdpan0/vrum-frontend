@@ -20,4 +20,8 @@ export const InputWrapper = styled.input`
     margin-top: .8rem;
     border-radius: .2rem;
     border: .5px solid #AAAAAA;
+
+    &&[type="radio"] {
+        margin: 0;
+    }
 `;

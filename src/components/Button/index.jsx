@@ -1,9 +1,9 @@
 import React from 'react'
 import { RedirectButtonWrapper, FormButtonWrapper, FormButtonContainer } from './style'
 
-export const RedirectButton = ({ href, children }) => (
-    <RedirectButtonWrapper to={href}>
-        {children}
+export const RedirectButton = (props) => (
+    <RedirectButtonWrapper {...props}>
+        {props.children}
     </RedirectButtonWrapper>
 )
 
