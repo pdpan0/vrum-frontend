@@ -27,8 +27,6 @@ function PassageiroDetalhes(props) {
     const passageiroId = props.match.params.id
 
     async function getPassageiroPorId() {
-        setLoading(true)
-
         try {
             await passageiroPorId(passageiroId).then(res => {
                 setPassageiro(res.data)
@@ -36,23 +34,19 @@ function PassageiroDetalhes(props) {
         } catch (err) {
             history.push('/passageiros')
         }
-
-        setLoading(false)
     }
 
     async function getCorridasPorPassageiroAsync() {
-        setLoading(true);
         await serviceCorridasPorPassageiro(passageiroId).then(res =>
             setCorridas(res.data)
         )
-        setLoading(false);
     }
 
     const deletarCorridaAsync = async (passageiroId) => {
         setLoading(true)
         try {
             await serviceDeletarCorrida(passageiroId)
-            window.location.reload();
+            getCorridasPorPassageiroAsync()
         } catch (err) {
             alert('Não foi possível realizar está operação.')
         }
@@ -61,10 +55,12 @@ function PassageiroDetalhes(props) {
 
     useEffect(() => {
         if (!loading) {
+            setLoading(true)
             getPassageiroPorId()
             getCorridasPorPassageiroAsync()
+            setLoading(false)
         }
-    }, [passageiro])
+    }, [passageiro, corridas])
 
     return (
         <Template>

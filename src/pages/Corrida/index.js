@@ -19,22 +19,21 @@ function Corrida() {
     
     const history = useHistory();
 
-    useEffect(() => {
-        async function handleCorridas() {
-            setLoading(true)
-            try{
-                await serviceCorridasRecentes.get().then(
-                    res => setCorridas(res.data)
-                );
-            }catch (err) {
-                setLoading(false)
-                history.push('/')
-            }
-            setLoading(false)
+    async function handleCorridas() {
+        try{
+            await serviceCorridasRecentes.get().then(
+                res => setCorridas(res.data)
+            );
+        }catch (err) {
+            history.push('/')
         }
+    }
 
+    useEffect(() => {
         if(!loading) {
+            setLoading(true)
             handleCorridas()
+            setLoading(false)
         }
     },[corridas])
 
@@ -42,7 +41,7 @@ function Corrida() {
         setLoading(true)
         try{
             await serviceDeletarCorrida(corridaId)
-            // window.location.reload();
+            handleCorridas()
         } catch(err) {
             alert('Não foi possível realizar está operação.')
             setLoading(false)

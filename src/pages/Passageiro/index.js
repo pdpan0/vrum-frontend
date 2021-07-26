@@ -18,22 +18,21 @@ function Passageiro() {
     
     const history = useHistory();
 
-    useEffect(() => {
-        async function handlePassageiros() {
-            setLoading(true)
-            try{
-                await listaPassageiros.get().then(
-                    res => setPassageiros(res.data)
-                );
-            }catch (err) {
-                setLoading(false)
-                history.push('/')
-            }
-            setLoading(false)
+    async function handlePassageiros() {
+        try{
+            await listaPassageiros.get().then(
+                res => setPassageiros(res.data)
+            );
+        }catch (err) {
+            history.push('/')
         }
+    }
 
+    useEffect(() => {
         if(!loading) {
+            setLoading(true)
             handlePassageiros()
+            setLoading(false)
         }
     },[passageiros])
 
@@ -41,7 +40,7 @@ function Passageiro() {
         setLoading(true)
         try{
             await deletarPassageiro(passageiroId)
-            // window.location.reload();
+            handlePassageiros()
         } catch(err) {
             setLoading(false)
             alert('Não foi possível realizar está operação.')

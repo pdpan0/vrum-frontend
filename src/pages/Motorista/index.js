@@ -19,22 +19,21 @@ function Motorista() {
     
     const history = useHistory();
 
-    useEffect(() => {
-        async function handleMotoristas() {
-            setLoading(true)
-            try{
-                await getMotoristas.get().then(
-                    res => setMotoristas(res.data)
-                );
-            }catch (err) {
-                setLoading(false)
-                history.push('/')
-            }
-            setLoading(false)
+    async function handleMotoristas() {
+        try{
+            await getMotoristas.get().then(
+                res => setMotoristas(res.data)
+            );
+        }catch (err) {
+            history.push('/')
         }
+    }
 
+    useEffect(() => {
         if(!loading) {
+            setLoading(true)
             handleMotoristas()
+            setLoading(false)
         }
     },[motoristas])
 
@@ -42,7 +41,7 @@ function Motorista() {
         setLoading(true)
         try{
             await deletarMotorista(motoristaId)
-            // window.location.reload();
+            handleMotoristas()
         } catch(err) {
             setLoading(false)
             alert('Não foi possível realizar está operação.')
