@@ -11,47 +11,78 @@ import { FormButton } from '../../components/Button';
 
 //APIs
 import { getMotoristaPorId as serviceMotoristaPorId, serviceAtivarMotorista, serviceInativarMotorista } from '../../services/motorista'
+import { serviceCorridasPorMotorista, serviceDeletarCorrida } from '../../services/corrida';
+import CorridaTable from '../../components/Tables/CorridaTable';
 
 
 function MotoristaDetalhes(props) {
     const [motorista, setMotorista] = useState({});
+    const [corridas, setCorridas] = useState({});
+    const [loading, setLoading] = useState(false);
+
     const history = useHistory();
 
     const motoristaId = props.match.params.id
 
     async function getMotoristaPorId() {
-        let mounted = true
+        setLoading(true)
 
         try {
             await serviceMotoristaPorId({ motoristaId }).then(res => {
-                if (mounted) {
-                    setMotorista(res.data)
-                }
+                setMotorista(res.data)
             })
         } catch (err) {
             history.push('/motoristas')
         }
 
-        return () => mounted = false;
+        setLoading(false)
     }
 
-    async function ativarMotorista() {
+    async function ativarMotoristaAsync() {
+        setLoading(true)
         await serviceAtivarMotorista({ motoristaId });
+        window.location.reload();
+        setLoading(false)
     }
 
-    async function inativarMotorista() {
+    async function inativarMotoristaAsync() {
+        setLoading(true);
         await serviceInativarMotorista({ motoristaId });
+        window.location.reload();
+        setLoading(false)
+    }
+
+    async function getCorridasPorMotoristaAsync() {
+        setLoading(true);
+        await serviceCorridasPorMotorista(motoristaId).then(res =>
+            setCorridas(res.data)
+        )
+        setLoading(false);
+    }
+
+    const deletarCorridaAsync = async (motoristaId) => {
+        setLoading(true)
+        try{
+            await serviceDeletarCorrida(motoristaId)
+            // window.location.reload();
+        } catch(err) {
+            alert('Não foi possível realizar está operação.')
+        }
+        setLoading(false)
     }
 
     useEffect(() => {
-        getMotoristaPorId()
-    }, [motorista])
+        if (!loading) {
+            getMotoristaPorId()
+            getCorridasPorMotoristaAsync()
+        }
+    }, [motorista, corridas])
 
     return (
         <Template>
             <Container>
                 <ImageProfile>
-                    <FontAwesomeIcon icon={faUser} width="10rem" height="10rem" className="profile-icon" />
+                    <FontAwesomeIcon icon={faUser} className="profile-icon" />
                 </ImageProfile>
                 <Wrapper>
                     <ProfileInfo>
@@ -64,15 +95,18 @@ function MotoristaDetalhes(props) {
                     </ProfileInfo>
                     {motorista.status
                         ?
-                        <FormButton onClick={inativarMotorista}>
+                        <FormButton onClick={inativarMotoristaAsync}>
                             Inativar Motorista
                         </FormButton>
                         :
-                        <FormButton onClick={ativarMotorista}>
+                        <FormButton onClick={ativarMotoristaAsync}>
                             Ativar Motorista
                         </FormButton>
                     }
                 </Wrapper>
+                {!corridas.length
+                    ? <h3>Este motorista ainda não tem nenhuma corrida.</h3>
+                    : <CorridaTable obj={corridas}onClick={deletarCorridaAsync} />}
             </Container>
         </Template>
     )

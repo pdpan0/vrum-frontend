@@ -11,13 +11,15 @@ import CadMotorista from './pages/Cadastros/CadMotorista'
 import AtualizarMotorista from './pages/Atualizar/AtualizarMotorista'
 import MotoristaDetalhes from './pages/MotoristaDetalhes'
 import CadPassageiro from './pages/Cadastros/CadPassageiro'
+import CadCorrida from './pages/Cadastros/CadCorrida'
 
 function AppRouter() {
     return (
         <Router>
             <Switch>
                 <Route exact path="/" component={Landing} />
-                <Route path="/corridas" component={Corrida} />
+                <Route exact path="/corridas" component={Corrida} />
+                <Route path="/corridas/criar" component={CadCorrida} />
                 <Route exact path="/passageiros" component={Passageiro} />
                 <Route path="/passageiros/criar" component={CadPassageiro} />
                 <Route exact path="/motoristas" component={Motorista} />

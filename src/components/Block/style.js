@@ -25,4 +25,5 @@ export const BlockWrapper = styled(Link)`
 export const BlockContainerWrapper = styled.div`
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 `;
