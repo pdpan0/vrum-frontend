@@ -9,6 +9,9 @@ export const listaPassageiros = axios.create({
     baseURL: `${BASE_URL}/v1/passageiros`
 })
 
+export const passageiroPorId = (passageiroId) => 
+    axios.get(`${BASE_URL}/v1/passageiros/${passageiroId}`)
+
 export const cadastroPassageiro = axios.create({
     baseURL: `${BASE_URL}/v1/passageiros`
 })

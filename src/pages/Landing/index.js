@@ -9,16 +9,18 @@ import Title from '../../components/Title';
 import { motoristaCount } from '../../services/motorista';
 import { passageiroCount } from '../../services/passageiro';
 import { corridaCount } from '../../services/corrida';
+import Loading from '../../components/Loading';
 
 function Landing() {
-    
+    const [loading, setLoading] = useState(false)
     const [counters, setCounters] = useState([])
     const history = useHistory();
 
     useEffect(()=>{
         async function handleDashboards() {
+            setLoading(true)
             let responseCounters = []
-    
+            
             try {
                 await motoristaCount.get().then(
                         res => responseCounters.push(res.data)
@@ -30,17 +32,23 @@ function Landing() {
                         res => responseCounters.push(res.data)
                     )
             } catch (err) {
+                setLoading(false)
                 history.push('/')
             }
     
             setCounters(responseCounters)
+            setLoading(false);
         }
 
-        handleDashboards()
+        if (!loading) {
+            handleDashboards()
+        }
+
     },[])
 
     return (
         <Template>
+            <Loading isLoading={loading}/>
             <Title>Dashboard</Title>
             Clique em algum board para ver os detalhes.
             <BlockContainerWrapper>

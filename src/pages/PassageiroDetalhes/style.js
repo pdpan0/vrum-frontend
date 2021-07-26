@@ -6,9 +6,9 @@ export const Container = styled.article`
     border: .5px solid #AAAAAA;
     display: grid;
     grid-template-areas:
-        'header header header'
-        'info info action'
-        'table table table';
+        'header'
+        'info '
+        'table';
     grid-gap: 10px;
 `;
 
@@ -34,7 +34,7 @@ export const ImageProfile = styled.div`
 
 export const ProfileInfo = styled.div`
     grid-area: info;
-    justify-self: flex-end;
+    justify-self: center;
 `;
 
 export const ActionWrapper = styled.div`

@@ -11,10 +11,12 @@ import { FormButton } from '../../../components/Button';
 import { serviceCadastrarCorrida } from '../../../services/corrida';
 import { getMotoristas } from '../../../services/motorista'
 import { listaPassageiros as serviceListaPassageiros } from '../../../services/passageiro'
+import Loading from '../../../components/Loading';
 
 
 
 function CadCorrida() {
+    const [loading, setLoading] = useState(false)
     const [listaMotoristas, setListaMotoristas] = useState([])
     const [listaPassageiros, setListaPassageiros] = useState([])
     const [passageiroSelecionado, setPassageiroSelecionado] = useState(0);
@@ -29,6 +31,8 @@ function CadCorrida() {
         if (validarPrecoTotal(precoTotal) &&
             validarMotoristaSelecionado(motoristaSelecionado) &&
             validarPassageiroSelecionado(passageiroSelecionado)) {
+            
+            setLoading(true)
 
             let data = {
                 "motoristaId": motoristaSelecionado,
@@ -38,9 +42,10 @@ function CadCorrida() {
 
             try {
                 await serviceCadastrarCorrida.post('#', data)
+                alert('Corrida criada com sucesso.')
                 history.push("/corridas");
             } catch (err) {
-
+                setLoading(false)
             }
         }
     }
@@ -84,16 +89,21 @@ function CadCorrida() {
     }
 
     useEffect(() => {
-        try {
-            getMotoristasAsync()
-            getPassageirosAsync()
-        } catch (err) {
-
+        if(!loading) {
+            try {
+                setLoading(true)
+                getMotoristasAsync()
+                getPassageirosAsync()
+            } catch (err) {
+                setLoading(false)
+            }
+            setLoading(false)
         }
     }, [])
 
     return (
         <Template>
+            <Loading isLoading={loading} />
             <Title>Crie sua corrida</Title>
             <Form onSubmit={submitCorrida}>
                 <Label>
@@ -115,7 +125,7 @@ function CadCorrida() {
                     Preço Total:
                     <Input type="number"
                         value={precoTotal}
-                        onChange={(e) => validarPrecoTotal(e.target.value)}
+                        onChange={(e) => setPrecoTotal(Number(e.target.value))}
                         required />
                 </Label>
                 <FormButton type="submit">Cadastrar Corrida</FormButton>

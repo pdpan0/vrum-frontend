@@ -8,6 +8,11 @@ export const corridaCount = axios.create({
 export const serviceCorridasPorMotorista = (motoristaId) =>
     axios.get(`${BASE_URL}/v1/corridas/motoristas/${motoristaId}`);
 
+
+export const serviceCorridasPorPassageiro = (passageiroId) =>
+    axios.get(`${BASE_URL}/v1/corridas/passageiros/${passageiroId}`);
+
+
 export const serviceCorridasRecentes = axios.create({
     baseURL: `${BASE_URL}/v1/corridas`
 })
@@ -18,5 +23,5 @@ export const serviceCadastrarCorrida = axios.create({
 })
 
     
-export const serviceDeletarCorrida = (motoristaId) =>
-    axios.delete(`${BASE_URL}/v1/corridas/${motoristaId}`)
+export const serviceDeletarCorrida = (corridaId) =>
+    axios.delete(`${BASE_URL}/v1/corridas/${corridaId}`)

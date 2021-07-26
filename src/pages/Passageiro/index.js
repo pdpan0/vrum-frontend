@@ -10,37 +10,48 @@ import MainContainer from '../../components/MainContainer';
 //APIs
 import { deletarPassageiro, listaPassageiros } from '../../services/passageiro';
 import { CreateButtonWrapper } from '../Motorista/style';
+import Loading from '../../components/Loading';
 
 function Passageiro() {
+    const [loading, setLoading] = useState(false)
     const [passageiros, setPassageiros] = useState([]);
     
     const history = useHistory();
 
     useEffect(() => {
         async function handlePassageiros() {
+            setLoading(true)
             try{
                 await listaPassageiros.get().then(
                     res => setPassageiros(res.data)
                 );
             }catch (err) {
+                setLoading(false)
                 history.push('/')
             }
+            setLoading(false)
         }
 
-        handlePassageiros()
+        if(!loading) {
+            handlePassageiros()
+        }
     },[passageiros])
 
     const deletarPassageiroAsync = async (passageiroId) => {
+        setLoading(true)
         try{
             await deletarPassageiro(passageiroId)
             // window.location.reload();
         } catch(err) {
+            setLoading(false)
             alert('Não foi possível realizar está operação.')
         }
+        setLoading(false)
     }
     
     return (
         <Template>
+            <Loading isLoading={loading} />
             <Title>Passageiros</Title>
             <CreateButtonWrapper>
                 <RedirectButton to="/passageiros/criar">

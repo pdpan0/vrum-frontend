@@ -9,8 +9,10 @@ import { Form, Input, Label } from '../../../components/Form';
 import { cadastroMotorista } from '../../../services/motorista';
 import { ContainerWrapper } from './style';
 import { FormButton } from '../../../components/Button';
+import Loading from '../../../components/Loading';
 
 function CadMotorista() {
+    const [loading, setLoading] = useState(false)
     const [nome, setNome] = useState('');
     const [dataNasc, setDataNasc] = useState(new Date(2001,1,1));
     const [cpf, setCpf] = useState('');
@@ -23,6 +25,8 @@ function CadMotorista() {
     async function submitMotorista(e) {
         e.preventDefault();
 
+        setLoading(true)
+
         let data = {
             "nome": nome,
             "dataNasc": dataNasc,
@@ -34,9 +38,10 @@ function CadMotorista() {
 
         try {
             await cadastroMotorista.post('#', data)
+            alert('Motorista criado com sucesso.')
             history.push("/motoristas");
         } catch(err) {
-            
+            setLoading(false)
         }
     }
 
@@ -56,6 +61,7 @@ function CadMotorista() {
 
     return (
         <Template>
+            <Loading isLoading={loading} />
             <Title>Conte mais sobre este Motorista.</Title>
             <Form onSubmit={submitMotorista}>
                 <Label>

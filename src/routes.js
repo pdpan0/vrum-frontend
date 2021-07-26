@@ -12,6 +12,7 @@ import AtualizarMotorista from './pages/Atualizar/AtualizarMotorista'
 import MotoristaDetalhes from './pages/MotoristaDetalhes'
 import CadPassageiro from './pages/Cadastros/CadPassageiro'
 import CadCorrida from './pages/Cadastros/CadCorrida'
+import PassageiroDetalhes from './pages/PassageiroDetalhes'
 
 function AppRouter() {
     return (
@@ -22,6 +23,7 @@ function AppRouter() {
                 <Route path="/corridas/criar" component={CadCorrida} />
                 <Route exact path="/passageiros" component={Passageiro} />
                 <Route path="/passageiros/criar" component={CadPassageiro} />
+                <Route path="/passageiros/:id/detalhes" component={PassageiroDetalhes} />
                 <Route exact path="/motoristas" component={Motorista} />
                 <Route path="/motoristas/criar" component={CadMotorista} />
                 <Route path="/motoristas/:id/detalhes" component={MotoristaDetalhes} />

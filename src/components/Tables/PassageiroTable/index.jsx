@@ -1,8 +1,10 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
-import Tooltip from '../../Tooltip';
 import { Table } from '../style'
+import { Link } from 'react-router-dom';
+//Componentes
+import Tooltip from '../../Tooltip';
 
 const PassageiroTable = ({obj, onClick}) => (
     <Table>
@@ -18,7 +20,7 @@ const PassageiroTable = ({obj, onClick}) => (
         <tbody>
             {obj.map(item => (
                 <tr key={item.id}>
-                    <th>{item.nome}</th>
+                    <th><Link to={`/passageiros/${item.id}/detalhes`}>{item.nome}</Link></th>
                     <th>{item.dataNasc}</th>
                     <th>{item.cpf}</th>
                     <th>{item.sexo}</th>

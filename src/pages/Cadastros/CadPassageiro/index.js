@@ -10,8 +10,10 @@ import { Form, Input, Label } from '../../../components/Form';
 import { cadastroPassageiro } from '../../../services/passageiro';
 import { ContainerWrapper } from './style';
 import { FormButton } from '../../../components/Button';
+import Loading from '../../../components/Loading';
 
 function CadPassageiro() {
+    const [loading, setLoading] = useState(false)
     const [nome, setNome] = useState('');
     const [dataNasc, setDataNasc] = useState(new Date(2001,1,1));
     const [cpf, setCpf] = useState('');
@@ -22,6 +24,8 @@ function CadPassageiro() {
     async function submitPassageiro(e) {
         e.preventDefault();
 
+        setLoading(true)
+
         let data = {
             "nome": nome,
             "dataNasc": dataNasc,
@@ -31,9 +35,10 @@ function CadPassageiro() {
 
         try {
             await cadastroPassageiro.post('#', data)
+            alert('Motorista criado com sucesso.')
             history.push("/passageiros");
         } catch(err) {
-            
+            setLoading(false)
         }
     }
 
@@ -53,6 +58,7 @@ function CadPassageiro() {
 
     return (
         <Template>
+            <Loading isLoading={loading}/>
             <Title>Conte mais sobre este Passageiro.</Title>
             <Form onSubmit={submitPassageiro}>
                 <Label>
