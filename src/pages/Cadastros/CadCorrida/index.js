@@ -31,7 +31,7 @@ function CadCorrida() {
         if (validarPrecoTotal(precoTotal) &&
             validarMotoristaSelecionado(motoristaSelecionado) &&
             validarPassageiroSelecionado(passageiroSelecionado)) {
-            
+
             setLoading(true)
 
             let data = {
@@ -89,7 +89,7 @@ function CadCorrida() {
     }
 
     useEffect(() => {
-        if(!loading) {
+        if (!loading) {
             try {
                 setLoading(true)
                 getMotoristasAsync()
@@ -110,15 +110,20 @@ function CadCorrida() {
                     Selecione o motorista:<br />
                     <select onChange={(e) => setMotoristaSelecionado(Number(e.target.value))} required>
                         <option value="0">Escolha um motorista</option>
-                        {listaMotoristas.map(item => item.status
-                            ? <option key={item.id} value={item.id}>{item.nome}</option> : null)}
+                        {!listaMotoristas.length
+                            ? null :
+                            listaMotoristas.map(item => item.status
+                                ? <option key={item.id} value={item.id}>{item.nome}</option> 
+                                : null)}
                     </select>
                 </Label>
                 <Label>
                     Selecione o passageiro:<br />
                     <select onChange={(e) => setPassageiroSelecionado(Number(e.target.value))} required>
                         <option value="0">Escolha um passageiro</option>
-                        {listaPassageiros.map(item => <option key={item.id} value={item.id}>{item.nome}</option>)}
+                        {!listaPassageiros.length
+                            ? null
+                            : listaPassageiros.map(item => <option key={item.id} value={item.id}>{item.nome}</option>)}
                     </select>
                 </Label>
                 <Label>

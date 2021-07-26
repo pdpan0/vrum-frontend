@@ -1,12 +1,12 @@
 import React from 'react'
 import { TooltipWrapper } from './style'
 
-const Tooltip = ({ displayText, children, onClick }) => {
+const Tooltip = (props) => {
 
     return (
-    <TooltipWrapper onClick={()=> onClick()}>
-        {children}
-        <span>{displayText}</span>
+    <TooltipWrapper {...props}>
+        {props.children}
+        <span>{props.displayText}</span>
     </TooltipWrapper>
 )}
 

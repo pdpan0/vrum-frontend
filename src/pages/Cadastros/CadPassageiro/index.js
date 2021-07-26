@@ -35,7 +35,7 @@ function CadPassageiro() {
 
         try {
             await cadastroPassageiro.post('#', data)
-            alert('Motorista criado com sucesso.')
+            alert('Passageiro criado com sucesso.')
             history.push("/passageiros");
         } catch(err) {
             setLoading(false)
@@ -82,7 +82,6 @@ function CadPassageiro() {
                        onChange={(e) => validarCpf(e.target.value)}
                        required />
                 </Label>
-                
                 <Label>
                     Sexo:
                     <ContainerWrapper>
