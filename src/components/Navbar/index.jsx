@@ -1,10 +1,13 @@
 import React from 'react'
-
 import { NavbarWrapper, LogoWrapper } from './style'
+import logo from './logo.png'
 
 const Navbar = () => (
     <NavbarWrapper>
-        <LogoWrapper to="/" >Vrum</LogoWrapper>
+        <LogoWrapper to="/" >
+            <img src={logo}/>
+            Vrum
+        </LogoWrapper>
     </NavbarWrapper>
 )
 

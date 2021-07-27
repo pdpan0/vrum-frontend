@@ -12,6 +12,9 @@ export const NavbarWrapper = styled.nav`
     `;
 
 export const LogoWrapper = styled(Link)`
+    display: flex;
+    justify-content: center;
+    align-items: center;
     color: var(--primary-color);
     font-size: 1.8rem;
     text-decoration: none;
