@@ -25,3 +25,7 @@ export const LogoWrapper = styled(Link)`
         opacity: .5;
     }
 `;
+
+export const Image = styled.img`
+    margin: .5rem;
+`;

@@ -4,6 +4,7 @@ export const TooltipWrapper = styled.div`
     position: relative;
     display: inline-block;
     border-bottom: 1px dotted black;
+    cursor: pointer;
 
     span {
         visibility: hidden;
