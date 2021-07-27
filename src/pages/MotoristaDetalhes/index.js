@@ -108,7 +108,7 @@ function MotoristaDetalhes(props) {
                 </ActionWrapper>
                 <TableWrapper>
                     {!corridas.length
-                        ? <h3>Este motorista ainda não tem nenhuma corrida.</h3>
+                        ? <div>Este motorista ainda não tem nenhuma corrida.</div>
                         : <CorridaTable obj={corridas} onClick={deletarCorridaAsync} />}
                 </TableWrapper>
             </Container>

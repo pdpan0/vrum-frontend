@@ -80,7 +80,7 @@ function PassageiroDetalhes(props) {
                 </ProfileInfo>
                 <TableWrapper>
                     {!corridas.length
-                        ? <h3>Este passageiro ainda não tem nenhuma corrida.</h3>
+                        ? <div>Este passageiro ainda não tem nenhuma corrida.</div>
                         : <CorridaTable obj={corridas} onClick={deletarCorridaAsync} />}
                 </TableWrapper>
             </Container>

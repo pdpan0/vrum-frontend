@@ -10,7 +10,6 @@ export const FormWrapper = styled.form`
 
 export const LabelWrapper = styled.label`
     width: 100%;
-    margin-top: .8rem;
 `;
 
 export const InputWrapper = styled.input`

@@ -85,24 +85,23 @@ function CadMotorista() {
                        onChange={(e) => validarCpf(e.target.value)}
                        required />
                 </Label>
-                Sexo:
                 <ContainerWrapper>
-                    <Label>
-                        <Input type="radio" 
-                            value="M"
-                            name="sexo"
-                            onChange={(e) => setSexo(e.target.value)}
-                            required />Masculino
-                    </Label>
-                    <Label>
-                        <Input type="radio" 
-                            value="F"
-                            name="sexo"
-                            onChange={(e) => setSexo(e.target.value)}
-                            required />Feminino
-                    </Label>
+                Sexo:
+                <Input id="sexo_m"
+                    type="radio" 
+                    value="M"
+                    name="sexo"
+                    onChange={(e) => setSexo(e.target.value)}
+                    required />
+                <Label htmlFor="sexo_m">Masculino</Label>
+                <Input id="sexo_f"
+                    type="radio" 
+                    value="F"
+                    name="sexo"
+                    onChange={(e) => setSexo(e.target.value)}
+                    required />
+                <Label htmlFor="sexo_f">Feminino</Label>
                 </ContainerWrapper>
-                
                 <Label>
                     Modelo do Carro:
                     <Input type="text" 

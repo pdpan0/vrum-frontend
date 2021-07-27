@@ -59,7 +59,7 @@ function Passageiro() {
             </CreateButtonWrapper>
             <MainContainer>
             {!passageiros.length 
-                ? <h1>Ainda não foi cadastrado nenhum passageiro.</h1> 
+                ? <div>Ainda não foi cadastrado nenhum passageiro.</div> 
                 : <PassageiroTable obj={passageiros} onClick={deletarPassageiroAsync}/>}
             </MainContainer>
         </Template>

@@ -7,8 +7,8 @@ export const Form = ({ children, onSubmit }) => (
     </FormWrapper>
 )
 
-export const Label = ({ children }) => (
-    <LabelWrapper>
+export const Label = ({htmlFor, children}) => (
+    <LabelWrapper htmlFor={htmlFor}>
         {children}
     </LabelWrapper>
 )

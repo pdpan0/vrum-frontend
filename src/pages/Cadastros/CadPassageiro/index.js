@@ -82,21 +82,23 @@ function CadPassageiro() {
                        onChange={(e) => validarCpf(e.target.value)}
                        required />
                 </Label>
-                <Label>
-                    Sexo:
-                    <ContainerWrapper>
-                        <Input type="radio" 
-                            value="M"
-                            name="sexo"
-                            onChange={(e) => setSexo(e.target.value)}
-                            required />Masculino
-                        <Input type="radio" 
-                            value="F"
-                            name="sexo"
-                            onChange={(e) => setSexo(e.target.value)}
-                            required />Feminino
-                    </ContainerWrapper>
-                </Label>
+                <ContainerWrapper>
+                Sexo:
+                <Input id="sexo_m"
+                    type="radio" 
+                    value="M"
+                    name="sexo"
+                    onChange={(e) => setSexo(e.target.value)}
+                    required />
+                <Label htmlFor="sexo_m">Masculino</Label>
+                <Input id="sexo_f"
+                    type="radio" 
+                    value="F"
+                    name="sexo"
+                    onChange={(e) => setSexo(e.target.value)}
+                    required />
+                <Label htmlFor="sexo_f">Feminino</Label>
+                </ContainerWrapper>
                 <FormButton type="submit">Cadastrar Passageiro</FormButton>
             </Form>
         </Template>

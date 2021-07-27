@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { ContainerWrapper } from './style';
+import { ComboBox } from './style';
 
 //Componentes
 import Template from '../../../components/Template';
 import Title from '../../../components/Title'
 import { Form, Input, Label } from '../../../components/Form';
 import { FormButton } from '../../../components/Button';
+import Loading from '../../../components/Loading';
+
 //APIs
 import { serviceCadastrarCorrida } from '../../../services/corrida';
 import { getMotoristas } from '../../../services/motorista'
 import { listaPassageiros as serviceListaPassageiros } from '../../../services/passageiro'
-import Loading from '../../../components/Loading';
 
 
 
@@ -106,26 +107,22 @@ function CadCorrida() {
             <Loading isLoading={loading} />
             <Title>Crie sua corrida</Title>
             <Form onSubmit={submitCorrida}>
-                <Label>
-                    Selecione o motorista:<br />
-                    <select onChange={(e) => setMotoristaSelecionado(Number(e.target.value))} required>
+                Selecione o motorista:
+                    <ComboBox onChange={(e) => setMotoristaSelecionado(Number(e.target.value))} required>
                         <option value="0">Escolha um motorista</option>
                         {!listaMotoristas.length
                             ? null :
                             listaMotoristas.map(item => item.status
                                 ? <option key={item.id} value={item.id}>{item.nome}</option> 
                                 : null)}
-                    </select>
-                </Label>
-                <Label>
-                    Selecione o passageiro:<br />
-                    <select onChange={(e) => setPassageiroSelecionado(Number(e.target.value))} required>
+                    </ComboBox>
+                Selecione o passageiro:
+                    <ComboBox onChange={(e) => setPassageiroSelecionado(Number(e.target.value))} required>
                         <option value="0">Escolha um passageiro</option>
                         {!listaPassageiros.length
                             ? null
                             : listaPassageiros.map(item => <option key={item.id} value={item.id}>{item.nome}</option>)}
-                    </select>
-                </Label>
+                    </ComboBox>
                 <Label>
                     Preço Total:
                     <Input type="number"
